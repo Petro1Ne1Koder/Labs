@@ -1,0 +1,28 @@
+{
+    "Data": {
+        "a7ad20b2-5f32-4ed3-aae8-0450a51e6157": {
+            "event": "Game convention",
+            "location": "Tokyo",
+            "date": "11.11.2022",
+            "ticket_type": "standart",
+            "price": 25,
+            "purchase_date": "2022-11-06 17:42:24.979647"
+        },
+        "b1236bd8-6407-4271-95a3-0a9e47258ce5": {
+            "event": "Game convention",
+            "location": "Tokyo",
+            "date": "11.11.2022",
+            "ticket_type": "student",
+            "price": 12,
+            "purchase_date": "2022-11-06 17:42:35.656977"
+        },
+        "379d85e3-171b-4e2e-8090-70f9a87f9649": {
+            "event": "Game convention",
+            "location": "Tokyo",
+            "date": "11.11.2022",
+            "ticket_type": "late",
+            "price": 23,
+            "purchase_date": "2022-11-06 17:42:58.236109"
+        }
+    }
+}

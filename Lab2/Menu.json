@@ -1,0 +1,86 @@
+{
+    "Pizza":[
+        {
+            "name": "Hawaiian pizza",
+            "ingredients": [
+                "pizza sauce",
+                "mozzarella",
+                "pineapple",
+                "chicken"
+            ],
+            "weight": 480,
+            "price": 135,
+            "day": "Monday"
+        },
+        {
+            "name": "Mushroom pizza",
+            "ingredients": [
+                "mushrooms",
+                "mozzarella",
+                "pepperoni",
+                "Alfredo sauce"
+            ],
+            "weight": 480,
+            "price": 99,
+            "day": "Tuesday"
+        },
+        {
+            "name": "Margherita pizza",
+            "ingredients": [
+                "pizza sauce",
+                "mozzarella"
+            ],
+            "weight": 460,
+            "price": 99,
+            "day": "Wednesday"
+        },
+        {
+            "name": "Mexican pizza",
+            "ingredients": [
+                "hunting sausages",
+                "barbecue sauce",
+                "chipotle"
+            ],
+            "weight": 470,
+            "price": 195,
+            "day": "Thursday"
+        },
+        {
+            "name": "Meat pizza",
+            "ingredients": [
+                "chicken",
+                "pepperoni",
+                "pizza sauce",
+                "bacon",
+                "veal",
+                "ham"
+            ],
+            "weight": 500,
+            "price": 263,
+            "day": "Friday"
+        },
+        {
+            "name": "Pepperoni pizza",
+            "ingredients": [
+                "mozzarella",
+                "pepperoni",
+                "pizza sauce"
+            ],
+            "price": 135,
+            "day": "Saturday"
+        },
+        {
+            "name": "Four cheeses pizza",
+            "ingredients": [
+                "mozzarella",
+                "parmesan",
+                "Alfredo sauce",
+                "cheddar",
+                "feta"
+            ],
+            "weight": 490,
+            "price": 205,
+            "day": "Sunday"
+        }
+    ]
+}

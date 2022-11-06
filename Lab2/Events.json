@@ -1,0 +1,25 @@
+{
+    "Events": [
+        {
+            "name": "Hackathon",
+            "location": "KPI",
+            "date": "31.02.2021",
+            "price": 25,
+            "amount": 9
+        },
+        {
+            "name": "Game convention",
+            "location": "Tokyo",
+            "date": "11.11.2022",
+            "price": 25,
+            "amount": 25
+        },
+        {
+            "name": "IT-event",
+            "location": "Ayia Napa",
+            "date": "07.11.2022",
+            "price": 30,
+            "amount": 0
+        }
+    ]
+}
