@@ -1,94 +1,104 @@
 import json
-import itertools
 from datetime import datetime
 
-
-class Info:
-    def __init__(self, fileind, stringind):
-        with open(fileind) as file:
-            self._products_data = json.load(file)
-        self._stringind = stringind
-
-    @property
-    def get_info(self):
-        return f"{self._products_data.items()}"
-
-    def __str__(self):
-        return "\n".join(f"{i}" for i in self._products_data[self._stringind])
-
-class Ingridients(Info):
-    def __init__(self, fileind="Ingridients.json", stringind="Ingridients"):
-        super().__init__(fileind, stringind)
-        self._stringind = stringind
-
-
-class Pizza:
+class Insid:
     def __init__(self):
-        self._day = datetime.today().strftime("%A")
-        with open("Menu.json") as file:
-            pizzas = json.load(file)
-        date = self._day
-        for i in pizzas["Pizza"]:
-            if date == i["day"]:
-                self.__dict__ = i.copy()
+        self._doping = {
+                                  "pineapple": 1.2,
+                                  "mushrooms": 1.3,
+                                  "chipotle": 1.5,
+                                  "bacon": 1.55,
+                                  "veal": 1.6,
+                                  "ham": 1.65,
+                                  }
+        self.ingr = []
+        self.dop_ingr = []
+        self.name = ""
+        self.price = 0
 
-    @property
-    def get_info(self):
-        return dict(itertools.islice(self.__dict__.items(), 3))
-
-    def adding(self, product):
-        self.__dict__["ingredients"].append(product["name"])
-        self.__dict__["price"] += product["price"]
-
-    def __str__(self):
-        return str.join("\n", [f"{i}: {self.__dict__[i]}" for i in self.__dict__.keys() if i != "day"])
-
-
-class Order:
-    def __init__(self):
-        with open("Menu.json") as file:
-            self._pizza_menu = json.load(file)
-        self._extra = Ingridients()
-        self._order = Pizza()
-
-    @property
     def get_menu(self):
-        return '\n'.join([f'{i["name"]}' for i in self._extra._products_data[self._extra._stringind]])
-
-    def change_pizza(self, product):
-        if not any(product == i["name"] for i in self._extra._products_data[self._extra._stringind]):
-            raise ValueError("invalid input")
-        for i in self._extra._products_data[self._extra._stringind]:
-            if product == i["name"]:
-                self._order.adding(i)
-
-    def make_order(self):
-            info = self._order.get_info
-            database = {
-                "name": info["name"],
-                "price": info["price"],
-                "purchase_date": str(datetime.now())
-            }
-
-    @property
-    def get_order_info(self):
-        info = self._order.get_info
-        return f'Today is: {datetime.today().strftime("%A")}\nWe recomend you: {info["name"]}\nIngredients - ' + ", ".join([f"{i}" for i in info["ingredients"]]) +\
-               f'\nPrice - {info["price"]}'
-
+        return f''+ ", ".join(map(str, self._doping))
+    
     def __str__(self):
-        return f'Your order is:\n{self._order}'
+        if not self.dop_ingr:
+            return f"{self.name}:\nIngredients - {', '.join(map(str, self.ingr))}\nPrice - {self.final_price()}"
+        else:
+            return f"{self.name}:\nIngredients - {', '.join(map(str, self.ingr)) +', ' + ', '.join(map(str, self.dop_ingr))} \
+                \nPrice - {self.final_price()}"
 
+    def adding(self, *args):
+        for ingredient in args:
+            if not isinstance(ingredient, str):
+                raise TypeError()
+            if ingredient not in self._doping.keys():
+                raise ValueError("We dont have this ingredient.")
+            self.dop_ingr.append(ingredient)
 
-your_order = Order()
-print(your_order.get_order_info)
-result = input("Would you like to add ingredients? (yes/no)\n")
+    def final_price(self):
+        return self.price + sum(self._doping[ingredients] for ingredients in self.dop_ingr)
+
+class HawaiianPizza(Insid):
+    def __init__(self):
+        super().__init__()
+        self.name = "Hawaiian pizza"
+        self.ingr = ["pizza sauce", "mozzarella", "pineapple", "chicken"]
+        self.price = 135
+
+class MushroomPizza(Insid):
+    def __init__(self):
+        super().__init__()
+        self.name = "Mushroom pizza"
+        self.ingr = ["mushrooms", "mozzarella", "pepperoni", "Alfredo sauce"]
+        self.price = 99
+
+class MargheritaPizza(Insid):
+    def __init__(self):
+        super().__init__()
+        self.name = "Margherita pizza"
+        self.ingr = ["pizza sauce", "mozzarella"]
+        self.price = 99
+
+class MexicanPizza(Insid):
+    def __init__(self):
+        super().__init__()
+        self.name = "Mexican pizza"
+        self.ingr = ["hunting sausages", "barbecue sauce", "chipotle"]
+        self.price = 195
+
+class MeatPizza(Insid):
+    def __init__(self):
+        super().__init__()
+        self.name = "Meat pizza"
+        self.ingr = ["chicken", "pepperoni", "pizza sauce", "bacon", "veal", "ham"]
+        self.price = 263
+
+class PepperoniPizza(Insid):
+    def __init__(self):
+        super().__init__()
+        self.name = "Pepperoni pizza"
+        self.ingr = ["mozzarella", "pepperoni", "pizza sauce"]
+        self.price = 135
+
+class FourCheesesPizza(Insid):
+    def __init__(self):
+        super().__init__()
+        self.name = "Four cheeses pizza"
+        self.ingr = ["mozzarella", "parmesan", "Alfredo sauce", "cheddar", "feta"]
+        self.price = 205
+               
+def TodaysPizza():
+    with open("ChoosePizza.json") as file:
+        list = json.load(file)
+    return eval(list[datetime.today().strftime("%A")])()
+
+Pizza = TodaysPizza()
+print("Todays is", datetime.today().strftime("%A"), "\nWe recommend to you:\n",Pizza)
+result = input("Would you like to add ingr? (yes/no)\n")
 if result.lower() == "yes":
-    print("Choose and input one from the list")
-    print(your_order.get_menu)
-    your_order.change_pizza(input())
+    print("\nChoose and input one from the list: ")
+    print(Pizza.get_menu())
+    ingr = input()
+    Pizza.adding(ingr)
 elif result.lower() != "no":
     raise IOError("invalid input")
-
-your_order.make_order()
-print(your_order)
+print("\nYour order is:\n",Pizza)
