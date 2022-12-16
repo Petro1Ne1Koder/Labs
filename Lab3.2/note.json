@@ -1,0 +1,6 @@
+[  {"type":  "teacher", "name": "Denis Zakharia"},
+  {"type":  "local", "name":  "English", "teacher":  "Denis Zakharia", "program":  ["tenses", "conditionals"], "auditory":  "108 auditory"},
+  
+  {"type":  "teacher", "name": "Petro Ivanovich"},
+  {"type":  "offsite", "name":  "Basics of health", "teacher":  "Petro Ivanovich", "program":  ["relaxation", "yoga", "sleeping"], "address": "park"}
+]
